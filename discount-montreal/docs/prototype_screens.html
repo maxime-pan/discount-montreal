@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Discount Montréal – Prototype Screens</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: #E8EDF2; padding: 40px 20px; }
+h1 { text-align: center; font-size: 22px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
+.subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 40px; }
+.screens-row { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+.screen-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.screen-label { font-size: 13px; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* Phone */
+.phone { width: 320px; height: 680px; background: #fff; border-radius: 36px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06); display: flex; flex-direction: column; flex-shrink: 0; }
+.status { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px 0; font-size: 10px; font-weight: 700; color: #0f172a; flex-shrink: 0; }
+.content { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+.nav { display: flex; border-top: 1px solid #e2e8f0; padding: 6px 0 14px; flex-shrink: 0; background: #fff; }
+.ni { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1px; font-size: 8px; font-weight: 600; color: #94a3b8; }
+.ni.a { color: #2563eb; }
+.ni-icon { font-size: 16px; }
+
+/* Shared bits */
+.chip { display: inline-flex; align-items: center; gap: 3px; background: #eff6ff; color: #2563eb; padding: 4px 8px; border-radius: 99px; font-size: 10px; font-weight: 600; }
+.badge-g { background: #dcfce7; color: #16a34a; padding: 2px 6px; border-radius: 99px; font-size: 9px; font-weight: 700; }
+.badge-b { background: #eff6ff; color: #2563eb; padding: 2px 6px; border-radius: 99px; font-size: 9px; font-weight: 700; }
+.search-bar { display: flex; align-items: center; background: #f1f5f9; border-radius: 10px; padding: 9px 12px; gap: 6px; }
+.search-bar span { font-size: 12px; color: #94a3b8; }
+.search-bar .ph { flex: 1; font-size: 12px; color: #94a3b8; }
+.sec-lbl { font-size: 9px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.store-card { border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; }
+.store-card.best { border: 2px solid #16a34a; }
+.scard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.s-logo { font-size: 16px; margin-right: 6px; }
+.s-name { font-size: 12px; font-weight: 700; color: #0f172a; }
+.s-dist { font-size: 10px; color: #94a3b8; }
+.price-big { font-size: 18px; font-weight: 800; color: #0f172a; }
+.price-og  { font-size: 10px; color: #94a3b8; text-decoration: line-through; }
+.filter-row { display: flex; gap: 6px; margin-bottom: 10px; }
+.flt { padding: 4px 10px; border-radius: 99px; border: 1.5px solid #e2e8f0; font-size: 10px; font-weight: 600; color: #475569; }
+.flt.a { background: #2563eb; border-color: #2563eb; color: #fff; }
+.cmp-cards { display: flex; gap: 8px; margin-bottom: 14px; }
+.cmp-card { flex: 1; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 10px 6px; text-align: center; }
+.cmp-card.best { border: 2px solid #16a34a; background: #f0fdf4; }
+.cmp-store { font-size: 10px; font-weight: 700; color: #475569; margin: 4px 0 2px; }
+.cmp-price { font-size: 20px; font-weight: 800; color: #0f172a; }
+.cmp-dist  { font-size: 9px; color: #94a3b8; margin-top: 3px; }
+.deal-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #f1f5f9; }
+.d-name { font-size: 12px; font-weight: 600; color: #0f172a; }
+.d-store{ font-size: 10px; color: #94a3b8; margin-top: 1px; }
+.d-price{ font-size: 14px; font-weight: 800; color: #0f172a; }
+.cat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 16px; }
+.cat-tile { background: #f1f5f9; border-radius: 10px; display: flex; flex-direction: column; align-items: center; padding: 12px 6px; }
+.cat-em { font-size: 20px; margin-bottom: 3px; }
+.cat-lbl { font-size: 10px; font-weight: 600; color: #475569; }
+.btn-p { background: #2563eb; color: #fff; border-radius: 10px; padding: 11px; font-size: 12px; font-weight: 700; text-align: center; margin: 10px 0 6px; }
+.tip-box { background: #eff6ff; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; }
+.tip-title { font-size: 10px; font-weight: 700; color: #2563eb; margin-bottom: 3px; }
+.tip-text { font-size: 10px; color: #475569; line-height: 1.5; }
+.detail-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.detail-logo { font-size: 30px; }
+.detail-name { font-size: 16px; font-weight: 800; color: #0f172a; }
+.detail-addr { font-size: 10px; color: #94a3b8; margin-top: 2px; }
+.detail-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.highlight-box { background: #f0fdf4; border: 1.5px solid #16a34a; border-radius: 10px; padding: 12px; margin-bottom: 14px; }
+.hl-lbl { font-size: 9px; font-weight: 700; color: #16a34a; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.hl-row { display: flex; justify-content: space-between; align-items: center; }
+.hl-name { font-size: 12px; font-weight: 600; color: #0f172a; }
+.hl-price { font-size: 20px; font-weight: 800; color: #0f172a; }
+.detail-list-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid #f1f5f9; }
+
+.back-btn { font-size: 12px; font-weight: 600; color: #2563eb; margin-bottom: 8px; }
+.screen-title { font-size: 16px; font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 3px; }
+.screen-sub   { font-size: 11px; color: #94a3b8; }
+</style>
+</head>
+<body>
+
+<h1>Discount Montréal — Prototype Screens</h1>
+<p class="subtitle">SOEN 357 · Team 123 · Concordia University · All screens are interactive in the running prototype</p>
+
+<div class="screens-row">
+
+<!-- ══════════════ SCREEN 1: HOME ══════════════ -->
+<div class="screen-wrap">
+  <div class="screen-label">Screen 1 — Home / Search</div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>📶 🔋</span></div>
+    <div class="content" style="padding: 14px 16px 0; overflow-y: auto;">
+      <div class="chip" style="margin-bottom: 10px;">📍 Côte-des-Neiges, Montréal</div>
+      <div class="screen-title">Find the best<br>grocery deals nearby</div>
+      <div style="font-size:11px; color:#94a3b8; margin: 4px 0 12px;">Search any item — we compare all nearby stores instantly.</div>
+      <div class="search-bar" style="margin-bottom: 16px;">
+        <span>🔍</span>
+        <div class="ph">Search for milk, eggs, bread...</div>
+      </div>
+      <div class="sec-lbl">Browse by category</div>
+      <div class="cat-grid">
+        <div class="cat-tile"><span class="cat-em">🥛</span><span class="cat-lbl">Dairy</span></div>
+        <div class="cat-tile"><span class="cat-em">🥦</span><span class="cat-lbl">Produce</span></div>
+        <div class="cat-tile"><span class="cat-em">🥩</span><span class="cat-lbl">Meat</span></div>
+        <div class="cat-tile"><span class="cat-em">🥫</span><span class="cat-lbl">Pantry</span></div>
+        <div class="cat-tile"><span class="cat-em">🧊</span><span class="cat-lbl">Frozen</span></div>
+        <div class="cat-tile"><span class="cat-em">🧹</span><span class="cat-lbl">Household</span></div>
+      </div>
+      <div class="sec-lbl">Featured deals this week</div>
+      <div class="deal-row">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:34px;height:34px;background:#f1f5f9;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🥛</div>
+          <div><div class="d-name">2% Milk (2L)</div><div class="d-store">Maxi</div></div>
+        </div>
+        <div style="text-align:right;"><div class="d-price">$3.82</div><span class="badge-g">−15%</span></div>
+      </div>
+      <div class="deal-row">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:34px;height:34px;background:#f1f5f9;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🥚</div>
+          <div><div class="d-name">Eggs 12pk</div><div class="d-store">Metro</div></div>
+        </div>
+        <div style="text-align:right;"><div class="d-price">$4.49</div><span class="badge-g">−10%</span></div>
+      </div>
+      <div class="deal-row">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:34px;height:34px;background:#f1f5f9;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🍗</div>
+          <div><div class="d-name">Chicken Breast 1kg</div><div class="d-store">Metro</div></div>
+        </div>
+        <div style="text-align:right;"><div class="d-price">$9.34</div><span class="badge-g">−15%</span></div>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="ni a"><span class="ni-icon">🏠</span>Home</div>
+      <div class="ni"><span class="ni-icon">🔍</span>Search</div>
+      <div class="ni"><span class="ni-icon">📋</span>List</div>
+      <div class="ni"><span class="ni-icon">👤</span>Profile</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SCREEN 2: RESULTS ══════════════ -->
+<div class="screen-wrap">
+  <div class="screen-label">Screen 2 — Search Results</div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>📶 🔋</span></div>
+    <div class="content" style="padding: 12px 16px 0; overflow-y: auto;">
+      <div class="back-btn">← Back</div>
+      <div class="screen-title">2% Milk (2L)</div>
+      <div class="screen-sub" style="margin-bottom: 10px;">4 stores nearby · sorted by price</div>
+      <div class="filter-row">
+        <div class="flt a">💰 Lowest price</div>
+        <div class="flt">📍 Nearest</div>
+      </div>
+
+      <div class="store-card best">
+        <div class="scard-top">
+          <div style="display:flex;align-items:center;">
+            <span class="s-logo">🛍</span>
+            <div><div class="s-name">Maxi</div><div class="s-dist">📍 1.4 km away</div></div>
+          </div>
+          <div style="text-align:right;"><div class="price-big">$3.82</div><div class="price-og">$4.49</div></div>
+        </div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;">
+          <span class="badge-g">🏆 Best deal</span>
+          <span class="badge-g">−15% off</span>
+          <span style="background:#f1f5f9;color:#475569;padding:2px 6px;border-radius:99px;font-size:9px;font-weight:700;">🕐 8am–10pm</span>
+        </div>
+      </div>
+
+      <div class="store-card">
+        <div class="scard-top">
+          <div style="display:flex;align-items:center;">
+            <span class="s-logo">🛒</span>
+            <div><div class="s-name">IGA</div><div class="s-dist">📍 0.4 km away</div></div>
+          </div>
+          <div style="text-align:right;"><div class="price-big">$4.99</div></div>
+        </div>
+        <div style="display:flex;gap:5px;">
+          <span style="background:#f1f5f9;color:#475569;padding:2px 6px;border-radius:99px;font-size:9px;font-weight:700;">🕐 7am–10pm</span>
+        </div>
+      </div>
+
+      <div class="store-card">
+        <div class="scard-top">
+          <div style="display:flex;align-items:center;">
+            <span class="s-logo">🏬</span>
+            <div><div class="s-name">Super C</div><div class="s-dist">📍 2.1 km away</div></div>
+          </div>
+          <div style="text-align:right;"><div class="price-big">$4.79</div></div>
+        </div>
+        <div style="display:flex;gap:5px;">
+          <span style="background:#f1f5f9;color:#475569;padding:2px 6px;border-radius:99px;font-size:9px;font-weight:700;">🕐 7am–11pm</span>
+        </div>
+      </div>
+
+      <div class="btn-p">Compare top 3 deals →</div>
+    </div>
+    <div class="nav">
+      <div class="ni"><span class="ni-icon">🏠</span>Home</div>
+      <div class="ni a"><span class="ni-icon">🔍</span>Search</div>
+      <div class="ni"><span class="ni-icon">📋</span>List</div>
+      <div class="ni"><span class="ni-icon">👤</span>Profile</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SCREEN 3: COMPARE ══════════════ -->
+<div class="screen-wrap">
+  <div class="screen-label">Screen 3 — Compare Deals</div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>📶 🔋</span></div>
+    <div class="content" style="padding: 12px 16px 0; overflow-y: auto;">
+      <div class="back-btn">← Back</div>
+      <div class="screen-title">Compare deals</div>
+      <div class="screen-sub" style="margin-bottom: 12px;">2% Milk (2L) · Top 3 stores</div>
+
+      <div class="cmp-cards">
+        <div class="cmp-card best">
+          <div style="font-size:9px;font-weight:800;color:#16a34a;text-transform:uppercase;letter-spacing:0.04em;">🏆 Best</div>
+          <div style="font-size:18px;margin:3px 0;">🛍</div>
+          <div class="cmp-store">Maxi</div>
+          <div class="cmp-price">$3.82</div>
+          <div class="badge-g" style="margin-top:4px;display:inline-block;">−15%</div>
+          <div class="cmp-dist">📍 1.4 km</div>
+        </div>
+        <div class="cmp-card">
+          <div style="font-size:18px;margin:3px 0;">🏬</div>
+          <div class="cmp-store">Super C</div>
+          <div class="cmp-price">$4.79</div>
+          <div class="cmp-dist">📍 2.1 km</div>
+        </div>
+        <div class="cmp-card">
+          <div style="font-size:18px;margin:3px 0;">🛒</div>
+          <div class="cmp-store">IGA</div>
+          <div class="cmp-price">$4.99</div>
+          <div class="cmp-dist">📍 0.4 km</div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-title">💡 Savings tip</div>
+        <div class="tip-text">Shopping at Maxi saves you <strong>$1.17</strong> compared to the most expensive option nearby.</div>
+      </div>
+
+      <div class="sec-lbl">All stores — full breakdown</div>
+      <div class="deal-row">
+        <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:14px;">🛍</span><div><div class="d-name">Maxi</div><div class="d-store">📍 1.4 km</div></div></div>
+        <div style="text-align:right;"><div class="d-price">$3.82</div><span class="badge-g">−15%</span></div>
+      </div>
+      <div class="deal-row">
+        <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:14px;">🏬</span><div><div class="d-name">Super C</div><div class="d-store">📍 2.1 km</div></div></div>
+        <div style="text-align:right;"><div class="d-price">$4.79</div></div>
+      </div>
+      <div class="deal-row">
+        <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:14px;">🏪</span><div><div class="d-name">Metro</div><div class="d-store">📍 0.8 km</div></div></div>
+        <div style="text-align:right;"><div class="d-price">$5.29</div></div>
+      </div>
+      <div class="deal-row">
+        <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:14px;">🛒</span><div><div class="d-name">IGA</div><div class="d-store">📍 0.4 km</div></div></div>
+        <div style="text-align:right;"><div class="d-price">$4.99</div></div>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="ni"><span class="ni-icon">🏠</span>Home</div>
+      <div class="ni a"><span class="ni-icon">🔍</span>Search</div>
+      <div class="ni"><span class="ni-icon">📋</span>List</div>
+      <div class="ni"><span class="ni-icon">👤</span>Profile</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SCREEN 4: STORE DETAIL ══════════════ -->
+<div class="screen-wrap">
+  <div class="screen-label">Screen 4 — Store Detail</div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>📶 🔋</span></div>
+    <div class="content" style="padding: 12px 16px 0; overflow-y: auto;">
+      <div class="back-btn">← Back</div>
+      <div class="detail-header">
+        <span class="detail-logo">🛍</span>
+        <div>
+          <div class="detail-name">Maxi</div>
+          <div class="detail-addr">7000 Henri-Bourassa Blvd, Montreal</div>
+        </div>
+      </div>
+      <div class="detail-badges">
+        <span class="badge-g">🕐 8am–10pm</span>
+        <span class="badge-b">📍 1.4 km away</span>
+      </div>
+      <div class="highlight-box">
+        <div class="hl-lbl">Your searched item</div>
+        <div class="hl-row">
+          <div class="hl-name">2% Milk (2L)</div>
+          <div class="hl-price">$3.82</div>
+        </div>
+        <div style="font-size:10px;color:#16a34a;margin-top:3px;">Saving 15% this week</div>
+      </div>
+      <div class="sec-lbl">More deals at this store</div>
+      <div style="border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;">
+        <div class="detail-list-row" style="padding:9px 12px;">
+          <div><div style="font-size:11px;font-weight:600;color:#0f172a;">Tomatoes (1kg)</div><span class="badge-g" style="margin-top:3px;display:inline-block;">−10%</span></div>
+          <div style="text-align:right;"><div style="font-size:13px;font-weight:800;color:#0f172a;">$2.51</div><div style="font-size:9px;color:#94a3b8;text-decoration:line-through;">$2.79</div></div>
+        </div>
+        <div class="detail-list-row" style="padding:9px 12px;">
+          <div><div style="font-size:11px;font-weight:600;color:#0f172a;">Cheddar Cheese (400g)</div><span class="badge-g" style="margin-top:3px;display:inline-block;">−20%</span></div>
+          <div style="text-align:right;"><div style="font-size:13px;font-weight:800;color:#0f172a;">$5.59</div><div style="font-size:9px;color:#94a3b8;text-decoration:line-through;">$6.99</div></div>
+        </div>
+        <div class="detail-list-row" style="padding:9px 12px;border-bottom:none;">
+          <div><div style="font-size:11px;font-weight:600;color:#0f172a;">Pasta Penne (900g)</div><span class="badge-g" style="margin-top:3px;display:inline-block;">−15%</span></div>
+          <div style="text-align:right;"><div style="font-size:13px;font-weight:800;color:#0f172a;">$1.69</div><div style="font-size:9px;color:#94a3b8;text-decoration:line-through;">$1.99</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="ni"><span class="ni-icon">🏠</span>Home</div>
+      <div class="ni a"><span class="ni-icon">🔍</span>Search</div>
+      <div class="ni"><span class="ni-icon">📋</span>List</div>
+      <div class="ni"><span class="ni-icon">👤</span>Profile</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SCREEN 5: CATEGORY ══════════════ -->
+<div class="screen-wrap">
+  <div class="screen-label">Screen 5 — Category Browse</div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>📶 🔋</span></div>
+    <div class="content" style="padding: 12px 16px 0; overflow-y: auto;">
+      <div class="back-btn">← Back</div>
+      <div class="screen-title">🥛 Dairy</div>
+      <div class="screen-sub" style="margin-bottom:12px;">Best deals this week · sorted by discount</div>
+
+      <div class="deal-row">
+        <div><div class="d-name">2% Milk (2L)</div><div class="d-store">Best at Maxi · 📍 1.4 km</div></div>
+        <div style="text-align:right;"><div class="d-price">$3.82</div><span class="badge-g">−15%</span></div>
+      </div>
+      <div class="deal-row">
+        <div><div class="d-name">Cheddar Cheese (400g)</div><div class="d-store">Best at Maxi · 📍 1.4 km</div></div>
+        <div style="text-align:right;"><div class="d-price">$5.59</div><span class="badge-g">−20%</span></div>
+      </div>
+      <div class="deal-row">
+        <div><div class="d-name">Eggs (12pk)</div><div class="d-store">Best at Metro · 📍 0.8 km</div></div>
+        <div style="text-align:right;"><div class="d-price">$4.49</div><span class="badge-g">−10%</span></div>
+      </div>
+      <div class="deal-row">
+        <div><div class="d-name">Greek Yogurt (500g)</div><div class="d-store">Best at Maxi · 📍 1.4 km</div></div>
+        <div style="text-align:right;"><div class="d-price">$3.79</div></div>
+      </div>
+      <div class="deal-row">
+        <div><div class="d-name">Butter (454g)</div><div class="d-store">Best at IGA · 📍 0.4 km</div></div>
+        <div style="text-align:right;"><div class="d-price">$6.29</div><span class="badge-g">−10%</span></div>
+      </div>
+      <div class="deal-row">
+        <div><div class="d-name">Greek Yogurt (500g)</div><div class="d-store">Best at Metro · 📍 0.8 km</div></div>
+        <div style="text-align:right;"><div class="d-price">$3.79</div><span class="badge-g">−5%</span></div>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="ni"><span class="ni-icon">🏠</span>Home</div>
+      <div class="ni a"><span class="ni-icon">🔍</span>Search</div>
+      <div class="ni"><span class="ni-icon">📋</span>List</div>
+      <div class="ni"><span class="ni-icon">👤</span>Profile</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end screens-row -->
+
+<p style="text-align:center;font-size:12px;color:#94a3b8;margin-top:40px;">Discount Montréal · SOEN 357 · Team 123 · Concordia University 2026</p>
+</body>
+</html>
