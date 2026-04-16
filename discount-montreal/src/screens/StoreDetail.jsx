@@ -1,73 +1,73 @@
+import StatusBar from "./StatusBar";
+import NavBar from "./NavBar";
 import { items } from "../data/groceries";
 
 export default function StoreDetail({ store, navigate }) {
   if (!store) return null;
-  const storeItems = items.filter(i => i.discounts[store.id] !== null).slice(0, 8);
+  const dealsHere = items.filter(i=>i.discounts[store.id]!==null).slice(0,12);
 
   return (
     <>
-      <div className="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-      <div className="screen-header">
-        <button className="back-btn" onClick={() => navigate("results", { query: store.item?.name || "milk", item: store.item })}>← Back</button>
+      <StatusBar/>
+      <div style={{background:"var(--surface)",padding:"10px 16px 0",borderBottom:"1px solid var(--border)"}}>
+        <button className="back-btn" onClick={()=>navigate("results",{query:store.item?.name||"milk",item:store.item})}>← Back</button>
       </div>
 
       <div className="screen-content">
-        <div className="detail-wrap" style={{ paddingTop: 0 }}>
+        {/* Store header */}
+        <div style={{background:"var(--surface)",padding:"16px 16px 18px",marginBottom:12,borderBottom:"1px solid var(--border)"}}>
           <div className="detail-store-header">
-            <span className="detail-logo">{store.logo}</span>
+            <div className="detail-logo">{store.logo}</div>
             <div>
               <div className="detail-name">{store.name}</div>
-              <div className="detail-address">{store.address}</div>
+              <div className="detail-address">📍 {store.address}</div>
             </div>
           </div>
-
-          <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
-            <span className="badge" style={{ background: "var(--green-lt)", color: "var(--green)" }}>🕐 {store.hours}</span>
-            <span className="badge" style={{ background: "var(--blue-lt)", color: "var(--blue)" }}>📍 {store.distance} km away</span>
-          </div>
-
-          {store.result && (
-            <div style={{ background: "var(--green-lt)", borderRadius: "var(--radius)", padding: 16, marginBottom: 20, border: "1.5px solid var(--green)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--green)", marginBottom: 4 }}>YOUR SEARCHED ITEM</div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div style={{ fontSize: 15, fontWeight: 600, color: "var(--gray-900)" }}>{store.item?.name}</div>
-                <div style={{ fontSize: 24, fontWeight: 700, color: "var(--gray-900)" }}>${store.result.finalPrice.toFixed(2)}</div>
-              </div>
-              {store.result.discount && (
-                <div style={{ fontSize: 13, color: "var(--green)", marginTop: 4 }}>Saving {store.result.discount}% this week</div>
-              )}
-            </div>
-          )}
-
-          <p className="section-label" style={{ padding: 0, marginBottom: 12 }}>More deals at this store</p>
-          <div style={{ background: "var(--white)", border: "1px solid var(--gray-200)", borderRadius: "var(--radius)", overflow: "hidden" }}>
-            {storeItems.map((item, i) => {
-              const disc = item.discounts[store.id];
-              const raw = item.prices[store.id];
-              const final = disc ? +(raw * (1 - disc / 100)).toFixed(2) : raw;
-              return (
-                <div key={item.id} className="detail-row" style={{ padding: "12px 16px" }}>
-                  <div>
-                    <div style={{ fontSize: 14, fontWeight: 500, color: "var(--gray-900)" }}>{item.name}</div>
-                    {disc && <span className="badge badge-green" style={{ marginTop: 4 }}>−{disc}%</span>}
-                  </div>
-                  <div style={{ textAlign: "right" }}>
-                    <div style={{ fontSize: 16, fontWeight: 700, color: "var(--gray-900)" }}>${final.toFixed(2)}</div>
-                    {disc && <div style={{ fontSize: 11, color: "var(--gray-400)", textDecoration: "line-through" }}>${raw.toFixed(2)}</div>}
-                  </div>
-                </div>
-              );
-            })}
+          <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+            <span className="badge badge-green">🕐 {store.hours}</span>
+            <span className="badge badge-blue">📍 {store.distance} km away</span>
           </div>
         </div>
-      </div>
 
-      <div className="nav-bar">
-        <button className="nav-item" onClick={() => navigate("home")}><span className="nav-icon">🏠</span>Home</button>
-        <button className="nav-item active"><span className="nav-icon">🔍</span>Search</button>
-        <button className="nav-item"><span className="nav-icon">📋</span>List</button>
-        <button className="nav-item"><span className="nav-icon">👤</span>Profile</button>
+        {/* Searched item */}
+        {store.result&&(
+          <div style={{margin:"0 16px 14px",padding:"16px",background:"linear-gradient(135deg,rgba(48,209,88,0.1),var(--surface))",borderRadius:16,border:"1px solid var(--green)"}}>
+            <div style={{fontSize:11,fontWeight:700,color:"var(--green)",marginBottom:8,textTransform:"uppercase",letterSpacing:"0.06em"}}>Your item</div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <div style={{fontSize:15,fontWeight:700,color:"var(--text)"}}>{store.item?.name}</div>
+              <div style={{fontSize:28,fontWeight:800,color:"var(--text)",fontFamily:"'DM Mono',monospace",letterSpacing:"-0.5px"}}>${store.result.finalPrice.toFixed(2)}</div>
+            </div>
+            {store.result.discount&&(
+              <div style={{display:"flex",alignItems:"center",gap:8,marginTop:8}}>
+                <span className="badge badge-green">−{store.result.discount}% off</span>
+                <span style={{fontSize:12,color:"var(--green)"}}>Saving ${((store.result.rawPrice-store.result.finalPrice)).toFixed(2)} this week</span>
+              </div>
+            )}
+          </div>
+        )}
+
+        <p className="section-label" style={{marginBottom:8}}>All deals at {store.name}</p>
+        <div className="card-section">
+          {dealsHere.map(it=>{
+            const disc=it.discounts[store.id]; const raw=it.prices[store.id];
+            const fin=disc?+(raw*(1-disc/100)).toFixed(2):raw;
+            return (
+              <div key={it.id} className="detail-row" style={{padding:"13px 16px"}}>
+                <div>
+                  <div style={{fontSize:14,fontWeight:600,color:"var(--text)"}}>{it.name}</div>
+                  {disc&&<span className="badge badge-green" style={{marginTop:5,display:"inline-flex"}}>−{disc}%</span>}
+                </div>
+                <div style={{textAlign:"right"}}>
+                  <div style={{fontSize:17,fontWeight:800,color:"var(--text)",fontFamily:"'DM Mono',monospace"}}>${fin.toFixed(2)}</div>
+                  {disc&&<div style={{fontSize:11,color:"var(--text-4)",textDecoration:"line-through",marginTop:1,fontFamily:"'DM Mono',monospace"}}>${raw.toFixed(2)}</div>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{height:16}}/>
       </div>
+      <NavBar navigate={navigate} active="search"/>
     </>
   );
 }

@@ -1,20 +1,20 @@
-# Discount Montréal
+# Discount Montreal
 
-A mobile grocery savings app for Montreal residents. Built for SOEN 357 (User Interface Design) at Concordia University.
+A mobile grocery savings interface for Montreal residents, built as part of the SOEN 357 (User Interface Design) course at Concordia University, Winter 2026.
 
-## What it does
+## Project Overview
 
-We noticed that finding grocery discounts in Montreal is way more annoying than it needs to be. You have to open like 4 different apps, compare prices in your head, and half the time the deal isn't even at a store near you. So we built this.
+Finding grocery discounts in Montreal currently requires users to open multiple store applications, browse through separate flyers, and compare prices manually across different sources. This fragmented experience imposes unnecessary cognitive load and makes it difficult for budget-conscious shoppers to identify the best available deals near them.
 
-Discount Montréal lets you search for any grocery item and immediately see all nearby stores ranked by price. No flyer browsing, no switching between apps, no mental math.
+Discount Montreal proposes a different approach: users search by item, and the app immediately returns all nearby stores ranked by price. No flyer browsing, no switching between applications, and no manual price tracking.
 
-**Main features:**
-- Search by item name (e.g. "milk", "eggs") — autocomplete included
-- Results ranked by lowest price or nearest store (your choice)
-- Side-by-side comparison of top 3 deals
-- Category browsing (Dairy, Produce, Meat, Pantry, Frozen, Household)
-- Store detail page with all current deals at that location
-- Location chip showing your neighborhood (simulated for prototype)
+**Core features:**
+- Item-first search with autocomplete (e.g., "milk", "eggs", "chicken breast")
+- Results sorted by lowest price or nearest store
+- Side-by-side comparison of the top three deals
+- Category browsing across six sections: Dairy, Produce, Meat, Pantry, Frozen, Household
+- Store detail view showing all active discounts at a given location
+- Neighbourhood location chip (simulated for prototype)
 
 ## Team
 
@@ -25,24 +25,24 @@ Discount Montréal lets you search for any grocery item and immediately see all 
 | Adam Mohammed Dahmane | 40251506 |
 | Nkrumah Leugoue Nougoue | 40258711 |
 
-Course: SOEN 357 — User Interface Design  
-Professor: Dr. Hakim Mellah  
-Concordia University, Winter 2026
+**Course:** SOEN 357 — User Interface Design  
+**Professor:** Dr. Hakim Mellah  
+**Institution:** Concordia University, Montreal  
 
-## Tech stack
+## Technology Stack
 
 - React 18
-- Vite (dev server + build tool)
-- Plain CSS (no UI library — we wrote all the styles ourselves)
-- Static mock data (no backend — all grocery data is in `src/data/groceries.js`)
+- Vite (development server and build tool)
+- Plain CSS (no external UI library)
+- Static mock data — all grocery pricing is defined in `src/data/groceries.js`
 
-## How to run it
+## How to Run
 
-You need Node.js installed (version 16 or higher). If you don't have it, download it from https://nodejs.org.
+Node.js version 16 or higher is required. Download it from https://nodejs.org if not already installed.
 
-**Step 1 — Clone the repo**
+**Step 1 — Clone the repository**
 ```bash
-git clone https://github.com/team123-soen357/discount-montreal.git
+git clone https://github.com/maxime-pan/discount-montreal.git
 cd discount-montreal
 ```
 
@@ -51,12 +51,12 @@ cd discount-montreal
 npm install
 ```
 
-**Step 3 — Start the dev server**
+**Step 3 — Start the development server**
 ```bash
 npm run dev
 ```
 
-Then open your browser and go to `http://localhost:5173`. The app looks best in a narrow browser window (around 400px wide) to simulate the phone layout, but it works at any size.
+Open a browser and navigate to `http://localhost:5173`. The application is designed for a mobile form factor and looks best in a narrow browser window (approximately 400px wide). It is functional at any width.
 
 **To build for production:**
 ```bash
@@ -64,22 +64,26 @@ npm run build
 npm run preview
 ```
 
-## Project structure
+## Project Structure
 
 ```
 discount-montreal/
 ├── src/
-│   ├── App.jsx              # Root component + navigation state
+│   ├── App.jsx              # Root component and navigation state
 │   ├── main.jsx             # React entry point
-│   ├── index.css            # All global styles
+│   ├── index.css            # All global styles and CSS variables
 │   ├── screens/
-│   │   ├── Home.jsx         # Home screen with search + categories
-│   │   ├── Results.jsx      # Search results ranked by price/distance
+│   │   ├── Home.jsx         # Home screen: search bar and category tiles
+│   │   ├── Results.jsx      # Search results ranked by price or distance
 │   │   ├── Compare.jsx      # Side-by-side comparison of top 3 stores
-│   │   ├── StoreDetail.jsx  # Individual store with all deals
-│   │   └── Category.jsx     # Browse by food category
+│   │   ├── StoreDetail.jsx  # Individual store with all active deals
+│   │   └── Category.jsx     # Browse all discounts within a category
 │   └── data/
-│       └── groceries.js     # All mock grocery/price/store data
+│       └── groceries.js     # Mock grocery data: 4 stores, 40 items, 6 categories
+├── docs/
+│   ├── Discount_Montreal_FINAL_REPORT.docx   # Full project report
+│   ├── prototype_screens.html                # Static prototype screen reference
+│   └── study_materials.html                  # Consent form, tasks, questionnaire
 ├── index.html
 ├── vite.config.js
 └── package.json
@@ -87,31 +91,32 @@ discount-montreal/
 
 ## Data
 
-All grocery data is in `src/data/groceries.js`. It includes:
-- 4 stores (IGA, Metro, Maxi, Super C) with addresses and hours
-- 19 grocery items across 6 categories
-- Realistic Montreal pricing (pulled from actual weekly flyers)
-- About 30% of items have active discounts in any given store, which matches real flyer patterns
+All grocery data is defined in `src/data/groceries.js`. The dataset includes:
+- 4 stores: IGA, Metro, Maxi, Super C, each with addresses, hours, and distances
+- 40 grocery items across 6 categories
+- Pricing drawn from actual Montreal weekly flyers at the time of design
+- Approximately 30% of items carry an active discount at any given store, consistent with real flyer patterns
 
-In a real production version this would connect to a live API or web scraper. For this prototype the data is static.
+In a production version, this would connect to a live pricing API or automated flyer data source. For this prototype, all data is static.
 
-## Design decisions
+## Design Decisions
 
-We made a few specific choices worth mentioning:
+**Item-first, not store-first.** Every existing grocery application requires users to select a store before browsing. Discount Montreal inverts that: the user searches for what they need, and the interface returns all nearby stores ranked by price. This decision was the central hypothesis of the HCI usability study conducted as part of the course project.
 
-- **Item-first not store-first:** Every existing app makes you pick a store first. We flipped that. You search for what you need, and we show you where to get it cheapest. This was the main hypothesis of our HCI study.
-- **Flat navigation:** 3 screens deep maximum. No hamburger menus, no buried settings. You can always get back with one tap.
-- **Color means something:** Green = best deal or discount. Blue = interactive / your location. We didn't use colors just for decoration.
-- **No login, no account:** The prototype doesn't require any sign-in. We didn't want authentication to get in the way of testing the core interaction.
+**Flat navigation.** The deepest point in the application is three screens from the Home screen. There are no hamburger menus, hidden settings, or modal overlays. Every screen has a back button and a persistent bottom navigation bar.
 
-## Report
+**Colour as meaning.** Green indicates the best available deal or an active discount. Blue is used for interactive elements and the location chip. Red marks deals expiring within 24 hours. Colour is used to communicate, not to decorate.
 
-The full project report (Discount_Montreal_FINAL.docx) is included in the `/docs` folder along with the usability study materials (consent form, task instructions, questionnaire).
+**No authentication required.** The prototype does not require any sign-in. Removing authentication from the test flow ensures that usability measurements reflect interaction with the core interface rather than onboarding friction.
 
-## Notes for the TA
+## Documentation
 
-- The prototype runs entirely in the browser, no backend setup needed
-- All 5 main screens are functional and clickable
-- The search bar has autocomplete — try typing "milk", "eggs", or "bread"
-- The compare screen auto-calculates savings between stores
-- We tested on Chrome and Firefox — works fine on both
+The full project report, including the research question, hypothesis, methods, usability study results, and discussion, is available in the `/docs` folder as `Discount_Montreal_FINAL_REPORT.docx`. Study materials including the participant consent form, task instructions, and post-task questionnaire are available as `study_materials.html` in the same folder.
+
+## Notes for the Evaluator
+
+- The application runs entirely in the browser with no backend setup required.
+- All five screens are interactive and clickable.
+- The search bar includes autocomplete. Suggested search terms: "milk", "eggs", "bread", "chicken", "tomatoes".
+- The comparison screen calculates savings automatically based on the mock dataset.
+- Tested on Chrome and Firefox. Both work without issues.
